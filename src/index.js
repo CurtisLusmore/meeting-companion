@@ -5,13 +5,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 
+const room = window.location.hash.substr(1) || '%DEFAULT%';
+
 const connection = new HubConnectionBuilder()
   .withUrl('/meeting')
   .build();
-connection.start();
+connection.start().then(() => connection.send('join', room));
 
 const connectionProxy = {
-  send: sound => connection.invoke('send', sound),
+  send: sound => connection.invoke('send', room, sound),
   recv: (sound, callback) => connection.on(sound, callback)
 };
 

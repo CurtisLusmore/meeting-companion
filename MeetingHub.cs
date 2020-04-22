@@ -5,6 +5,7 @@ namespace meeting_companion
 {
     public class MeetingHub : Hub
     {
-        public Task Send(string sound) => Clients.All.SendAsync(sound);
+        public Task Join(string room) => Groups.AddToGroupAsync(Context.ConnectionId, room);
+        public Task Send(string room, string sound) => Clients.Group(room).SendAsync(sound);
     }
 }
