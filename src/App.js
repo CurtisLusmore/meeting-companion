@@ -1,24 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
+import Button from './Button';
 import './App.css';
 
-function App() {
+
+function App({ connection }) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Button connection={connection} icon="👏" alt="Clap" src="/audio/clap.mp3" />
+      <Button connection={connection} icon="👍" alt="Yes" src="/audio/yes.mp3" />
+      <Button connection={connection} icon="👎" alt="No" src="/audio/no.mp3" />
+      <Button connection={connection} icon="🔍" alt="Zoom" src="/audio/zoom.mp3" />
+      <Button connection={connection} icon="🧏‍♀️" alt="Louder" src="/audio/louder.mp3" />
+      <Button connection={connection} icon="💬" alt="Check chat" src="/audio/chat.mp3" />
     </div>
   );
 }
