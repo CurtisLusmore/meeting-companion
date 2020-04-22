@@ -3,10 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { HubConnectionBuilder } from '@microsoft/signalr';
+
+const connection = new HubConnectionBuilder()
+  .withUrl('/meeting')
+  .build();
+connection.start();
+
+const connectionProxy = {
+  send: sound => connection.invoke('send', sound),
+  recv: (sound, callback) => connection.on(sound, callback)
+};
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App connection={connectionProxy} />
   </React.StrictMode>,
   document.getElementById('root')
 );
